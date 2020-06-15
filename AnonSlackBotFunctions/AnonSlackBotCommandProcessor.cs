@@ -12,43 +12,42 @@ namespace AnonSlackBotFunctions
     public static class AnonSlackBotCommandProcessor
     {
         private const string SlackBotWebhookUrl = "https://hooks.slack.com/services/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";
-		
-		/// <summary>
-		/// принимаем запрос от бота в формате https://api.slack.com/interactivity/slash-commands#app_command_handling,
-        /// парсим и вытаскиваем оттуда text. Далее просто кидаем его на webhook бота, привязанного к конкретному каналу )
+        
+        /// <summary>
+        /// РїСЂРёРЅРёРјР°РµРј Р·Р°РїСЂРѕСЃ РѕС‚ Р±РѕС‚Р° РІ С„РѕСЂРјР°С‚Рµ https://api.slack.com/interactivity/slash-commands#app_command_handling,
+        /// РїР°СЂСЃРёРј Рё РІС‹С‚Р°СЃРєРёРІР°РµРј РѕС‚С‚СѓРґР° text. Р”Р°Р»РµРµ РїСЂРѕСЃС‚Рѕ РєРёРґР°РµРј РµРіРѕ РЅР° webhook Р±РѕС‚Р°, РїСЂРёРІСЏР·Р°РЅРЅРѕРіРѕ Рє РєРѕРЅРєСЂРµС‚РЅРѕРјСѓ РєР°РЅР°Р»Сѓ )
         ///
         /// curl --location --request POST 'localhost:7071/api/AnonSlackBotCommandProcessor' \
         /// --header 'Content-Type: application/x-www-form-urlencoded' \
         /// --data-urlencode 'text=sampletext'
-		/// </summary>
-		[FunctionName("AnonSlackBotCommandProcessor")]
+        /// </summary>
+        [FunctionName("AnonSlackBotCommandProcessor")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req, ILogger log)
         {
-	    try
-	    {
-	        log.LogInformation("Начали парсинг");
-	        var messageText = req.Form["text"];
-	        log.LogInformation($"text from form is {messageText}");
-	        if (!string.IsNullOrEmpty(messageText))
+            log.LogInformation("РќР°С‡Р°Р»Рё РїР°СЂСЃРёРЅРі");
+            try
             {
-                using var client = new HttpClient();
-                //json в формате, понимаемом slack
-                var slackMessage = new StringContent($"{{\"text\" : \"{messageText}\"}}");
-                var result = await client.PostAsync(SlackBotWebhookUrl, slackMessage);
-                log.LogInformation($"webhook call result is {result})");
-                result.EnsureSuccessStatusCode();
-                log.LogInformation("отправлено успешно.");
-                return new OkObjectResult("Сообщение отправлено в канал");
+                var messageText = req.Form["text"];
+                log.LogInformation($"text from form is {messageText}");
+                if (!string.IsNullOrEmpty(messageText))
+                {
+                    using var client = new HttpClient();
+                    //json РІ С„РѕСЂРјР°С‚Рµ, РїРѕРЅРёРјР°РµРјРѕРј slack
+                    var slackMessage = new StringContent($"{{\"text\" : \"{messageText}\"}}");
+                    var result = await client.PostAsync(SlackBotWebhookUrl, slackMessage);
+                    log.LogInformation($"webhook call result is {result})");
+                    result.EnsureSuccessStatusCode();
+                    log.LogInformation("РѕС‚РїСЂР°РІР»РµРЅРѕ СѓСЃРїРµС€РЅРѕ.");
+                    return new OkObjectResult("РЎРѕРѕР±С‰РµРЅРёРµ Р°РЅРѕРЅРёРјРЅРѕ РѕС‚РїСЂР°РІР»РµРЅРѕ РІ РєР°РЅР°Р»");
+                }
             }
-	    }
-	    catch (Exception ex)
-	    {
-	        log.LogCritical(ex, "полный провал");
-	    }
-	
-	    log.LogInformation("ошибка");
-	    return new OkObjectResult("Кажется, произошла ошибка");
+            catch (Exception ex)
+            {
+                log.LogCritical(ex, "РџРѕР»РЅС‹Р№ РїСЂРѕРІР°Р»");
+            }
+            log.LogInformation("РћС€РёР±РєР°");
+            return new OkObjectResult("РљР°Р¶РµС‚СЃСЏ, РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°");
         }
     }
 }
