@@ -22,7 +22,8 @@ curl --location --request POST 'https://hooks.slack.com/services/T037ZKH7E/B015W
 --data-raw ' {"text": "Сообщение от бота через webhook"} '
 ```
 
-NB: curl здесь указан для канала #anonbot_test, curl для #03ch ищи в запиненных сообшениях)
+NB: curl здесь указан для уже отключенного webhook.
+Актуальный curl ищи в запиненных каналов #anonbot_test и #03ch
 
 ## Работа с ботом через команды
 
@@ -43,7 +44,8 @@ curl --location --request POST 'anonslackbot.azurewebsites.net/api/AnonSlackBotC
 Мы специально передаём webhookPostfix, а не зашиваем его в коде, чтобы репозиторий мог быть публичным.
 Ну и менять настройки проще прямо в свойствах slack-команды
 
-http://www.plantuml.com/plantuml/uml/PP5FJi9G4CRtFSKSGDg5En8HNB2L1DsvgMMm3V0UzhqYQ4meSMCmNi4h8B7HyATUOUP6JXKYX3HlqM--zttJNwl6-h5DUbsdsVM3pgN1k5GvqxOCdZuEGWXn13qqnhz1nmziDF0jWimTEHiZlT6CnvpI5ws0FcX6Qrhpb38GvHFuYN8UqugdHq1pdl94x2ajP3WNRoQNHCffoIyYvc1nQE5AqRSehvp2ROBng2IlKYB-5MKyuJ7SuNMeTQUXZQr7mxzrQlT9ZFL4oPvQbQ5nthm0NsdL5idrYw7SCf55uogqfpiHxMXuyh0V-VZ_lRzeQlt8sIieLRRwfYgqjc_AdbU46DSKGpVGFK-O3g80ZNVGqC8zfjkytMIXctCgX0gwmYsNvvsVXTjQf4oG0YqAvdAM4dYuT1LLItxm3m00 диаграммка работы
+Sequence-диаграмма, как всё работает
+http://www.plantuml.com/plantuml/uml/PP9FJi9G4CRtFSKSG5gYEn8HNB1n0GcwSrFBO1kWnRvN18q943UcnYju1IGqcbBg5URTo2a85adpaZT_-iqtlxOYfEdBeDVLcbtJwbm9z0lbSq-MmF1EB1ji744FXJ1lKJCjwGnCYS1rZK-XN7q8VAm5hbM2Hhrv2QRhkMqETJChtEEDS2GAtKLvne7jUPs69sJR6Pu-vkAQCmJwea-W5StKH4tLc5AAA0QA-PBGZ0iB5JxzETWDrdQtFJVqpafZDM7P16YnLbYfaABD8FLCAGz9L7W4D5UXccQ3AURYd7iZVebJAItLAoTJa3YKSEtIDsVUr0Jk0lH71Gvv2FSd56McONydBUzjJRVQTtv1sLBsHSamidQXYwoeMrxFOFm3nq9X_EEJMtshb5FVVB3ZOX7g5reB3odbazohRJNolXXPci5V8sCOAJyVweLXh3Z5uEP0SGQIpv853mrLq6tnd_G3
 
 ## Анонимность
 
