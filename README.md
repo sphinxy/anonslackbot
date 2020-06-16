@@ -43,6 +43,8 @@ curl --location --request POST 'anonslackbot.azurewebsites.net/api/AnonSlackBotC
 Мы специально передаём webhookPostfix, а не зашиваем его в коде, чтобы репозиторий мог быть публичным.
 Ну и менять настройки проще прямо в свойствах slack-команды
 
+http://www.plantuml.com/plantuml/uml/PP5FJi9G4CRtFSKSGDg5En8HNB2L1DsvgMMm3V0UzhqYQ4meSMCmNi4h8B7HyATUOUP6JXKYX3HlqM--zttJNwl6-h5DUbsdsVM3pgN1k5GvqxOCdZuEGWXn13qqnhz1nmziDF0jWimTEHiZlT6CnvpI5ws0FcX6Qrhpb38GvHFuYN8UqugdHq1pdl94x2ajP3WNRoQNHCffoIyYvc1nQE5AqRSehvp2ROBng2IlKYB-5MKyuJ7SuNMeTQUXZQr7mxzrQlT9ZFL4oPvQbQ5nthm0NsdL5idrYw7SCf55uogqfpiHxMXuyh0V-VZ_lRzeQlt8sIieLRRwfYgqjc_AdbU46DSKGpVGFK-O3g80ZNVGqC8zfjkytMIXctCgX0gwmYsNvvsVXTjQf4oG0YqAvdAM4dYuT1LLItxm3m00 диаграммка работы
+
 ## Анонимность
 
 Отправка сообщений напрямую через curl в webhook через api slack анонимна по природе. Ну прокси используйте, если хотите. 
