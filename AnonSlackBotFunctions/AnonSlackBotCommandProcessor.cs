@@ -34,12 +34,13 @@ namespace AnonSlackBotFunctions
                 {
                     return new OkObjectResult($"Ошибка. Не передан query-параметр webhookPostfix для {SlackBotWebhookUrlPrefix}[...]!");
                 }
-                var messageText = req.Form["text"];
+                var messageText = (string)req.Form["text"];
                 log.LogInformation($"text from form is {messageText}");
+                //простая защита от @here и прочих
+                messageText = messageText.Replace("@", "");
                 if (!string.IsNullOrEmpty(messageText) )
                 {
-                    using var client = new HttpClient();
-                    client.BaseAddress = new Uri(SlackBotWebhookUrlPrefix);
+                    using var client = new HttpClient {BaseAddress = new Uri(SlackBotWebhookUrlPrefix)};
                     //json в формате, понимаемом slack
                     var slackMessage = new StringContent($"{{\"text\" : \"{messageText}\"}}");
                     var result = await client.PostAsync(webhookPostfix, slackMessage);
