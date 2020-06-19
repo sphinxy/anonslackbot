@@ -37,7 +37,10 @@ namespace AnonSlackBotFunctions
                 var messageText = (string)req.Form["text"];
                 log.LogInformation($"text from form is {messageText}");
                 //простая защита от @here и прочих
-                messageText = messageText.Replace("@", "");
+                messageText = messageText.Replace("@", "...");
+                messageText = messageText.Replace("here", "...");
+                messageText = messageText.Replace("channel", "...");
+                log.LogInformation($"filtered message is is {messageText}");
                 if (!string.IsNullOrEmpty(messageText) )
                 {
                     using var client = new HttpClient {BaseAddress = new Uri(SlackBotWebhookUrlPrefix)};
