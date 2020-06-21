@@ -36,11 +36,8 @@ namespace AnonSlackBotFunctions
                 }
                 var messageText = (string)req.Form["text"];
                 log.LogInformation($"text from form is {messageText}");
-                //простая защита от @here и прочих
-                messageText = messageText.Replace("@", "...");
-                messageText = messageText.Replace("here", "...");
-                messageText = messageText.Replace("channel", "...");
-                log.LogInformation($"filtered message is is {messageText}");
+                messageText = RemoveSlackCommandsFromText(messageText);
+                log.LogInformation($"filtered message is {messageText}");
                 if (!string.IsNullOrEmpty(messageText) )
                 {
                     using var client = new HttpClient {BaseAddress = new Uri(SlackBotWebhookUrlPrefix)};
@@ -58,6 +55,18 @@ namespace AnonSlackBotFunctions
             }
             log.LogInformation("Ошибка");
             return new OkObjectResult("Кажется, произошла ошибка");
+        }
+
+        /// <summary>
+        /// простая защита от @here и прочих
+        /// </summary>
+        private static string RemoveSlackCommandsFromText(string messageText)
+        {
+            //простая защита от @here и прочих
+            messageText = messageText.Replace("@", ".[removed].");
+            messageText = messageText.Replace("here", ".[removed].");
+            messageText = messageText.Replace("channel", ".[removed].");
+            return messageText;
         }
     }
 }
