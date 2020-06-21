@@ -4,7 +4,11 @@ Azure-функция для slack-бота анонимной отправки �
 
 ## TL;DR
 Если добавить в slack бота, а боту добавить webhook на конкретный канал, то можно анонимно постить сообщения через curl.
-Чтобы постить сообщения через команды бота, нужен враппер, вот эта azure function.
+Чтобы постить сообщения через команды бота, нужен враппер, вот эта azure function. Деплоится автоматом
+
+[![Статус билда](https://dev.azure.com/sphinxydevops/sphinxy_nest%20github%20build/_apis/build/status/anonslackbot%20-%20CI)](https://dev.azure.com/sphinxydevops/sphinxy_nest%20github%20build/_build/latest?definitionId=1)
+
+[![Статус деплоя](https://vsrm.dev.azure.com/sphinxydevops/_apis/public/Release/badge/ae04106c-f201-42cc-adef-6021ff99ad60/1/1)](https://dev.azure.com/sphinxydevops/sphinxy_nest%20github%20build/_release)
 
 ## Боты, вебхуки и полностью анонимный курл
 
