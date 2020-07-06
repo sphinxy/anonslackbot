@@ -25,10 +25,9 @@ curl --location --request POST 'https://hooks.slack.com/services/T037ZKH7E/B015W
 --header 'Content-Type: application/json' \
 --data-raw ' {"text": "Сообщение от бота через webhook"} '
 ```
-Про отправку в треды смотри https://github.com/sphinxy/anonslackbot/issues/1
 
 NB: curl здесь указан для уже отключенного webhook.
-Актуальный curl ищи в запиненных каналов #anonbot_test и #03ch
+Актуальный curl ищи в запиненных каналах #anonbot_test и #03ch
 
 ## Работа с ботом через команды
 
@@ -49,8 +48,20 @@ curl --location --request POST 'anonslackbot.azurewebsites.net/api/AnonSlackBotC
 Мы специально передаём webhookPostfix, а не зашиваем его в коде, чтобы репозиторий мог быть публичным.
 Ну и менять настройки проще прямо в свойствах slack-команды
 
+Для поддерки тредов нужно передать префикс reply-команды, например >https://domain.slack.com/archives/AA1B2CCC3/p5552465890058600, 
+через query-параметр replyCommandPrefix, тупо, но пока так.
+
 Sequence-диаграмма, как всё работает
 http://www.plantuml.com/plantuml/uml/PP9FJi9G4CRtFSKSG5gYEn8HNB1n0GcwSrFBO1kWnRvN18q943UcnYju1IGqcbBg5URTo2a85adpaZT_-iqtlxOYfEdBeDVLcbtJwbm9z0lbSq-MmF1EB1ji744FXJ1lKJCjwGnCYS1rZK-XN7q8VAm5hbM2Hhrv2QRhkMqETJChtEEDS2GAtKLvne7jUPs69sJR6Pu-vkAQCmJwea-W5StKH4tLc5AAA0QA-PBGZ0iB5JxzETWDrdQtFJVqpafZDM7P16YnLbYfaABD8FLCAGz9L7W4D5UXccQ3AURYd7iZVebJAItLAoTJa3YKSEtIDsVUr0Jk0lH71Gvv2FSd56McONydBUzjJRVQTtv1sLBsHSamidQXYwoeMrxFOFm3nq9X_EEJMtshb5FVVB3ZOX7g5reB3odbazohRJNolXXPci5V8sCOAJyVweLXh3Z5uEP0SGQIpv853mrLq6tnd_G3
+
+## Ответ на треды
+Технически для ответа на тред в вебхук на https://hooks.slack.com/services/{webhookPostfix} нужно передать еще и ts_thread:
+{"text": "тред тест", "thread_ts": "1592375586.000100"}
+
+Чтобы ответить на тред через бота, добавьте в текст команды полную ссылку на исходное сообщение и добавьте '>' впереди, например
+/03ch >https://domain.slack.com/archives/AA1B2CCC3/p5552465890058600 привет, это ответ на тред
+
+Для тредов не забудьте в настройках передавать еще и replyCommandPrefix!
 
 ## Анонимность
 
